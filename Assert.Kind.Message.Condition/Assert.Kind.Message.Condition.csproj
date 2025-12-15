@@ -8,7 +8,7 @@
 
         <!--Assembly attributes-->
         <Version>1.1.0</Version>
-        <Description>The Assert.Kind.Message.Condition pacakge provides you with an assertion library with a very convenient fluent interface.</Description>
+        <Description>The Assert.Kind.Message.Condition is a library with a very convenient fluent assertions.</Description>
         <Authors>Denis535</Authors>
         <Company>Denis535</Company>
         <Product>$(AssemblyName)</Product>
