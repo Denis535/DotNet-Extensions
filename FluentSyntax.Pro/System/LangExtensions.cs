@@ -9,8 +9,8 @@ namespace System {
 
         // Chain
         [MethodImpl( MethodImplOptions.AggressiveInlining )]
-        public static T Chain<T>(this T value, Action<T> callback) {
-            callback( value );
+        public static T Chain<T>(this T value, Action<T> processor) {
+            processor( value );
             return value;
         }
         [MethodImpl( MethodImplOptions.AggressiveInlining )]
@@ -18,15 +18,19 @@ namespace System {
             return converter( value );
         }
         [MethodImpl( MethodImplOptions.AggressiveInlining )]
-        public static Option<T> If<T>(this T value, Func<T, bool> predicate) {
+        public static Option<T> Filter<T>(this T value, Func<T, bool> predicate) {
             if (predicate( value )) return Option.Create( value );
             return default;
+        }
+        [MethodImpl( MethodImplOptions.AggressiveInlining )]
+        public static void Apply<T>(this T value, Action<T> callback) {
+            callback( value );
         }
 
         // Chain
         [MethodImpl( MethodImplOptions.AggressiveInlining )]
-        public static Option<T> Chain2<T>(this Option<T> value, Action<T> callback) {
-            if (value.HasValue) callback( value.Value );
+        public static Option<T> Chain2<T>(this Option<T> value, Action<T> processor) {
+            if (value.HasValue) processor( value.Value );
             return default;
         }
         [MethodImpl( MethodImplOptions.AggressiveInlining )]
@@ -35,9 +39,13 @@ namespace System {
             return default;
         }
         [MethodImpl( MethodImplOptions.AggressiveInlining )]
-        public static Option<T> If2<T>(this Option<T> value, Func<T, bool> predicate) {
-            if (value.HasValue && predicate( value.Value )) return Option.Create( value.Value );
+        public static Option<T> Filter<T>(this Option<T> value, Func<T, bool> predicate) {
+            if (value.HasValue) if (predicate( value.Value )) return value;
             return default;
+        }
+        [MethodImpl( MethodImplOptions.AggressiveInlining )]
+        public static void Apply<T>(this Option<T> value, Action<T> callback) {
+            if (value.HasValue) callback( value.Value );
         }
 
     }

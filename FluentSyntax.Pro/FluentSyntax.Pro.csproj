@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    
+
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
         <Nullable>enable</Nullable>
@@ -7,8 +7,8 @@
         <RootNamespace />
 
         <!--Assembly attributes-->
-        <Version>1.0.1</Version>
-        <Description>The FluentSyntax.Pro package provides you with a several useful chaining methods for convenient value processing.</Description>
+        <Version>1.1.0</Version>
+        <Description>The FluentSyntax.Pro is a library with a very convenient fluent syntax extensions.</Description>
         <Authors>Denis535</Authors>
         <Company>Denis535</Company>
         <Product>$(AssemblyName)</Product>
