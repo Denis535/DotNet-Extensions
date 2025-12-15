@@ -8,25 +8,25 @@ namespace System {
     public static class Exceptions {
         // Argument
         public static class Argument {
-            public static ArgumentException ArgumentException(FormattableString? message) {
+            public static ArgumentException Invalid(FormattableString? message) {
                 return Factory.GetException<ArgumentException>( message );
             }
-            public static ArgumentNullException ArgumentNullException(FormattableString? message) {
+            public static ArgumentNullException Null(FormattableString? message) {
                 return Factory.GetException<ArgumentNullException>( message );
             }
-            public static ArgumentOutOfRangeException ArgumentOutOfRangeException(FormattableString? message) {
+            public static ArgumentOutOfRangeException OutOfRange(FormattableString? message) {
                 return Factory.GetException<ArgumentOutOfRangeException>( message );
             }
         }
         // Operation
         public static class Operation {
-            public static InvalidOperationException InvalidOperationException(FormattableString? message) {
+            public static InvalidOperationException Invalid(FormattableString? message) {
                 return Factory.GetException<InvalidOperationException>( message );
             }
-            public static ObjectNotReadyException ObjectNotReadyException(FormattableString? message) {
+            public static ObjectNotReadyException NotReady(FormattableString? message) {
                 return Factory.GetException<ObjectNotReadyException>( message );
             }
-            public static ObjectDisposedException ObjectDisposedException(FormattableString? message) {
+            public static ObjectDisposedException Disposed(FormattableString? message) {
                 return Factory.GetException<ObjectDisposedException>( message );
             }
         }
@@ -48,43 +48,35 @@ namespace System {
         // Factory
         public static class Factory {
 
-            public static Func<FormattableString?, string?> GetMessageStringDelegate = GetMessageString;
-            public static Func<object?, string> GetArgumentStringDelegate = GetArgumentString;
-            public static Func<Type, string?, Exception> GetExceptionDelegate = GetException;
-
             // GetException
             public static T GetException<T>(FormattableString? message) where T : Exception {
-                var message2 = GetMessageStringDelegate( message );
-                return (T) GetExceptionDelegate( typeof( T ), message2 );
+                return GetException<T>( GetMessageString( message ) );
             }
 
-            // Helpers
-            private static string? GetMessageString(FormattableString? message) {
+            private static T GetException<T>(string? message) {
+                var constructor = typeof( T ).GetConstructor( new[] { typeof( string ), typeof( Exception ) } );
+                return (T) constructor.Invoke( new[] { message, null } );
+            }
+
+            // GetMessageString
+            internal static string? GetMessageString(FormattableString? message) {
                 if (message != null) {
-                    var format = message.Format.Replace( "{", "'{" ).Replace( "}", "}'" );
+                    var format = message.Format;
                     var arguments = message.GetArguments();
                     for (var i = 0; i < arguments.Length; i++) {
-                        arguments[ i ] = GetArgumentStringDelegate( arguments[ i ] );
+                        arguments[ i ] = "'" + GetArgumentString( arguments[ i ] ) + "'";
                     }
                     return string.Format( format, arguments );
                 }
                 return null;
             }
+
+            // GetArgumentString
             private static string GetArgumentString(object? argument) {
-                if (argument is ICollection collection) {
-                    return string.Join( ", ", collection.Cast<object?>().Select( GetArgumentString ) );
+                if (argument is IEnumerable enumerable and not string) {
+                    return string.Join( ", ", enumerable.Cast<object?>().Select( GetArgumentString ) );
                 }
-                if (argument is IList list) {
-                    return string.Join( ", ", list.Cast<object?>().Select( GetArgumentString ) );
-                }
-                if (argument is not null) {
-                    return argument.ToString();
-                }
-                return "Null";
-            }
-            private static Exception GetException(Type type, string? message) {
-                var constructor = type.GetConstructor( new[] { typeof( string ), typeof( Exception ) } );
-                return (Exception) constructor.Invoke( new[] { message, null } );
+                return argument?.ToString() ?? "Null";
             }
 
         }

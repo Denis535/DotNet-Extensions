@@ -4,20 +4,22 @@ root = true
 # C#/Vb files
 [*.{cs,vb}]
 
-#### Core EditorConfig Options ####
-
 # Indentation and spacing
 indent_size = 4
 indent_style = space
 tab_width = 4
 
-# Misc
-end_of_line = crlf
-insert_final_newline = true
+# New line
+csharp_new_line_before_open_brace = none
 
-#### Naming styles ####
+# Qualification ####
 
-# Rules
+dotnet_style_qualification_for_field = true:error
+dotnet_style_qualification_for_property = true:error
+dotnet_style_qualification_for_event = true:error
+dotnet_style_qualification_for_method = true:error
+
+# Naming rules
 dotnet_naming_rule.types.symbols = types
 dotnet_naming_rule.types.style = types
 dotnet_naming_rule.types.severity = warning
@@ -34,7 +36,7 @@ dotnet_naming_rule.members_private_field.symbols = members_private_field
 dotnet_naming_rule.members_private_field.style = members_private_field
 dotnet_naming_rule.members_private_field.severity = warning
 
-# Symbols
+# Naming symbols
 dotnet_naming_symbols.types.applicable_kinds = class, struct, interface, enum
 dotnet_naming_symbols.types.applicable_accessibilities = public, private, internal, protected, protected_internal, private_protected, file
 dotnet_naming_symbols.types.required_modifiers = 
@@ -51,7 +53,7 @@ dotnet_naming_symbols.members_private_field.applicable_kinds = field
 dotnet_naming_symbols.members_private_field.applicable_accessibilities = private
 dotnet_naming_symbols.members_private_field.required_modifiers = 
 
-# Styles
+# Naming styles
 dotnet_naming_style.types.required_prefix = 
 dotnet_naming_style.types.required_suffix = 
 dotnet_naming_style.types.word_separator = 
@@ -72,9 +74,6 @@ dotnet_naming_style.members_private_field.required_suffix =
 dotnet_naming_style.members_private_field.word_separator = 
 dotnet_naming_style.members_private_field.capitalization = pascal_case
 
-#### Qualification styles ####
-
-dotnet_style_qualification_for_field = true:error
-dotnet_style_qualification_for_property = true:error
-dotnet_style_qualification_for_event = true:error
-dotnet_style_qualification_for_method = true:error
+# Misc
+end_of_line = crlf
+insert_final_newline = true
