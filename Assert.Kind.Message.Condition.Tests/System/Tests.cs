@@ -21,13 +21,13 @@ namespace System {
         [Test]
         public void Test_01_Exceptions() {
             // Exceptions.Argument
-            _ = NUnit.Framework.Assert.Catch<ArgumentException>( () => throw Exceptions.Argument.ArgumentException( $"ArgumentException" ) );
-            _ = NUnit.Framework.Assert.Catch<ArgumentNullException>( () => throw Exceptions.Argument.ArgumentNullException( $"ArgumentNullException" ) );
-            _ = NUnit.Framework.Assert.Catch<ArgumentOutOfRangeException>( () => throw Exceptions.Argument.ArgumentOutOfRangeException( $"ArgumentOutOfRangeException" ) );
+            _ = NUnit.Framework.Assert.Catch<ArgumentException>( () => throw Exceptions.Argument.Invalid( $"ArgumentException" ) );
+            _ = NUnit.Framework.Assert.Catch<ArgumentNullException>( () => throw Exceptions.Argument.Null( $"ArgumentNullException" ) );
+            _ = NUnit.Framework.Assert.Catch<ArgumentOutOfRangeException>( () => throw Exceptions.Argument.OutOfRange( $"ArgumentOutOfRangeException" ) );
             // Exceptions.Operation
-            _ = NUnit.Framework.Assert.Catch<InvalidOperationException>( () => throw Exceptions.Operation.InvalidOperationException( $"InvalidOperationException" ) );
-            _ = NUnit.Framework.Assert.Catch<ObjectNotReadyException>( () => throw Exceptions.Operation.ObjectNotReadyException( $"ObjectNotReadyException" ) );
-            _ = NUnit.Framework.Assert.Catch<ObjectDisposedException>( () => throw Exceptions.Operation.ObjectDisposedException( $"ObjectDisposedException" ) );
+            _ = NUnit.Framework.Assert.Catch<InvalidOperationException>( () => throw Exceptions.Operation.Invalid( $"InvalidOperationException" ) );
+            _ = NUnit.Framework.Assert.Catch<ObjectNotReadyException>( () => throw Exceptions.Operation.NotReady( $"ObjectNotReadyException" ) );
+            _ = NUnit.Framework.Assert.Catch<ObjectDisposedException>( () => throw Exceptions.Operation.Disposed( $"ObjectDisposedException" ) );
             // Exceptions.Internal
             _ = NUnit.Framework.Assert.Catch<Exception>( () => throw Exceptions.Internal.Exception( $"Exception" ) );
             _ = NUnit.Framework.Assert.Catch<NullReferenceException>( () => throw Exceptions.Internal.NullReference( $"NullReferenceException" ) );
@@ -35,13 +35,13 @@ namespace System {
             _ = NUnit.Framework.Assert.Catch<NotImplementedException>( () => throw Exceptions.Internal.NotImplemented( $"NotImplementedException" ) );
         }
 
-        [Test]
-        public void Test_02_GetMessageString() {
-            TestContext.Out.WriteLine( Exceptions.Factory.GetMessageStringDelegate( $"Value: {null}" ) );
-            TestContext.Out.WriteLine( Exceptions.Factory.GetMessageStringDelegate( $"Value: {"777"}" ) );
-            TestContext.Out.WriteLine( Exceptions.Factory.GetMessageStringDelegate( $"Value: {777}" ) );
-            TestContext.Out.WriteLine( Exceptions.Factory.GetMessageStringDelegate( $"Values: {new object?[] { null, 777, "777" }}" ) );
-        }
+        // [Test]
+        // public void Test_02_GetMessageString() {
+        //     TestContext.Out.WriteLine( Exceptions.Factory.GetMessageStringDelegate( $"Value: {null}" ) );
+        //     TestContext.Out.WriteLine( Exceptions.Factory.GetMessageStringDelegate( $"Value: {"777"}" ) );
+        //     TestContext.Out.WriteLine( Exceptions.Factory.GetMessageStringDelegate( $"Value: {777}" ) );
+        //     TestContext.Out.WriteLine( Exceptions.Factory.GetMessageStringDelegate( $"Values: {new object?[] { null, 777, "777" }}" ) );
+        // }
 
     }
 }

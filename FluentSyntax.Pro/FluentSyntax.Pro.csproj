@@ -7,7 +7,7 @@
         <RootNamespace />
 
         <!--Assembly attributes-->
-        <Version>1.1.0</Version>
+        <Version>1.2.0</Version>
         <Description>The FluentSyntax.Pro is a library with a very convenient fluent syntax extensions.</Description>
         <Authors>Denis535</Authors>
         <Company>Denis535</Company>
@@ -50,10 +50,6 @@
         <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);IncludeBuilds</TargetsForTfmSpecificBuildOutput>
         <TargetsForTfmSpecificContentInPackage>$(TargetsForTfmSpecificContentInPackage);IncludeContent</TargetsForTfmSpecificContentInPackage>
     </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Option.Pro" Version="1.0.5" />
-    </ItemGroup>
 
     <ItemGroup>
         <Clean Include="$(PackageOutputPath)\*.nupkg" />
