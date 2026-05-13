@@ -56,5 +56,5 @@ public static class Option {
 ```
 
 # Links
-- https://github.com/denis535/DotNet.Extensions
+- https://github.com/denis535/DotNet-Extensions
 - https://www.nuget.org/packages/Option.Pro
