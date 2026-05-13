@@ -7,8 +7,8 @@
         <RootNamespace />
 
         <!--Assembly attributes-->
-        <Version>1.1.1</Version>
-        <Description>The Option is a container that may hold some value or be empty.</Description>
+        <Version>1.1.2</Version>
+        <Description>The Option.Pro is a library with a Nullable like container that may hold some value or be empty.</Description>
         <Authors>Denis535</Authors>
         <Company>Denis535</Company>
         <Product>$(AssemblyName)</Product>

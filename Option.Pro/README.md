@@ -1,5 +1,5 @@
 # Overview
-The Option is a container that may hold some value or be empty.
+The Option.Pro is a library with a Nullable like container that may hold some value or be empty.
 
 # Reference
 
